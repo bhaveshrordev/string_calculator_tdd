@@ -20,8 +20,8 @@ string_calculator_tdd/
 │── lib/
 │   ├── string_calculator.rb  # Main String Calculator Logic
 │   ├── negative_number_error.rb  # Custom Error Handling
-│── spec/
-│   ├── string_calculator_spec.rb  # RSpec Test Cases
+│── spec/lib/
+│          ├── string_calculator_spec.rb  # RSpec Test Cases
 │── README.md  # Project Documentation
 │── Gemfile  # Dependencies
 │── .rspec  # RSpec Config
