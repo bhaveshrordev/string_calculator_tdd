@@ -1,6 +1,8 @@
 require_relative 'negative_number_error'
 
 class StringCalculator
+  ALLOWED_EXPRESSION = /\A[\d\s+\-\+\*\/()]+\z/
+
   def self.add(numbers)
     return 0 if numbers.empty?
 
@@ -30,6 +32,13 @@ class StringCalculator
     negatives = num_list.select(&:negative?)
     raise NegativeNumberError.new(negatives) unless negatives.empty?
 
-    result = eval(expression)
+    result = save_eval(expression)
+  end
+
+
+  def self.save_eval(expression)
+    raise SecurityError, "Invalid characters detected in expression" unless expression.match?(ALLOWED_EXPRESSION)
+
+    eval(expression) # Safe execution since only allowed characters are present
   end
 end
