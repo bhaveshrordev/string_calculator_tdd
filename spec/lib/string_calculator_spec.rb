@@ -31,5 +31,11 @@ RSpec.describe StringCalculator do
       expect { StringCalculator.add("1,-2,3,-4") }
         .to raise_error(NegativeNumberError, "Negative numbers not allowed: -2, -4")
     end
+
+    it "raises an error for invalid characters" do
+      expect { StringCalculator.add("system('rm -rf /')") }.to raise_error(SecurityError)
+      expect { StringCalculator.add("`ls`") }.to raise_error(SecurityError)
+      expect { StringCalculator.add("2+3; puts 'Hello'") }.to raise_error(SecurityError)
+    end
   end
 end
