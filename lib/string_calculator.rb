@@ -13,12 +13,23 @@ class StringCalculator
       numbers = parts.last
     end
 
+    match = numbers.match(%r{//(.+)\n(.*)})
+
+    if match
+      delimiter = Regexp.escape(match[1])
+      numbers = match[2]
+    else
+      numbers = numbers
+    end
+
+    expression = numbers.gsub(Regexp.union(delimiter.split('|')), '+')
+
     num_list = numbers.split(/#{delimiter}/).map(&:to_i)
 
     # Handle negative numbers
     negatives = num_list.select(&:negative?)
     raise NegativeNumberError.new(negatives) unless negatives.empty?
 
-    num_list.sum
+    result = eval(expression)
   end
 end
