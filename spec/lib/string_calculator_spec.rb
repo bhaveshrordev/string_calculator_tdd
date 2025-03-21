@@ -38,6 +38,8 @@ RSpec.describe StringCalculator do
       expect { StringCalculator.add("2+3; puts 'Hello'") }.to raise_error(SecurityError)
       expect { StringCalculator.add("File.read('/etc/passwd')") }.to raise_error(SecurityError)
       expect { StringCalculator.add("Dir.glob('*')") }.to raise_error(SecurityError)
+      expect { StringCalculator.add("exec('ls')") }.to raise_error(SecurityError)
+      expect { StringCalculator.add("Kernel.exit") }.to raise_error(SecurityError)
     end
   end
 end
