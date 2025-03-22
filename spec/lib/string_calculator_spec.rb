@@ -40,6 +40,9 @@ RSpec.describe StringCalculator do
       expect { StringCalculator.add("Dir.glob('*')") }.to raise_error(SecurityError)
       expect { StringCalculator.add("exec('ls')") }.to raise_error(SecurityError)
       expect { StringCalculator.add("Kernel.exit") }.to raise_error(SecurityError)
+      expect { StringCalculator.add("@var = 100") }.to raise_error(SecurityError)
+      expect { StringCalculator.add("Object.new") }.to raise_error(SecurityError)
+      expect { StringCalculator.add("2+3\nsystem('ls')") }.to raise_error(SecurityError)
     end
   end
 end
