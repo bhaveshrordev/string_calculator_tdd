@@ -43,6 +43,8 @@ RSpec.describe StringCalculator do
       expect { StringCalculator.add("@var = 100") }.to raise_error(SecurityError)
       expect { StringCalculator.add("Object.new") }.to raise_error(SecurityError)
       expect { StringCalculator.add("2+3\nsystem('ls')") }.to raise_error(SecurityError)
+      expect { StringCalculator.add("eval('2+3')") }.to raise_error(SecurityError)
+      expect { StringCalculator.add("10.times { puts 'Hacked' }") }.to raise_error(SecurityError)
     end
   end
 end
